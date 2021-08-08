@@ -1,0 +1,4 @@
+export const GET_CUSTOMERS = "GET_CUSTOMERS";
+export const GET_DEPARTMENT = "GET_DEPARTMENT";
+export const GET_EMPLOYEE = "GET_EMPLOYEE";
+// export const GET_DEPARTMENT = "GET_DEPARTMENT";
