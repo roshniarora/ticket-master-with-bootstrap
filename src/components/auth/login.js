@@ -1,10 +1,10 @@
 import React from "react";
 import { Formik, Form } from "formik";
+import './login.scss'
 
 const Login = () => {
   return (
     <div>
-      <h1>Login Here</h1>
       <Formik
         initialValues={{
           name: "",
@@ -17,31 +17,43 @@ const Login = () => {
       >
         {({ handleSubmit }) => {
           return (
-            <div>
-              <h1>Form</h1>
+            <div className='container'>
+              <h1>Sign in </h1>
               <Form onSubmit={handleSubmit}>
-                <div>
-                  <label>Email</label>
+                <div className='tex_field'> 
+                 
                   <input
                     type="text"
                     //   class="form-control"
                     id="email"
+                    placeholder='Email'
                   />
+                  
+                  <span></span>
+                  {/* <label>Email</label> */}
+                  </div>
 
-                  <label>Password</label>
+                  <div className='tex_field'>
+                
                   <input
                     type="text"
                     //   class="form-control"
                     id="password"
+                    placeholder='Password'
                   />
+                   
+                    <span></span>
+                    {/* <label>Password</label> */}
+                  </div>
+                  {/* <div className='pass'><h3>Forgot Password</h3></div> */}
 
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                  >
+                  <div className='btn'> 
+                  <button type="button">
                     Login
                   </button>
-                </div>
+                  </div>
+                    <div className='sig_link'> Not a member ?<a href='#'> Sign Up</a> </div>
+                
               </Form>
             </div>
           );

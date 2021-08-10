@@ -1,12 +1,12 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import "./register.scss";
+import "./login.scss";
 
 // import { Button } from "bootstrap";
 
 const Register = () => {
   return (
-    <div className="d-flex justify-content-center mt-5">
+    <div>
       <Formik
         initialValues={{
           name: "",
@@ -19,16 +19,12 @@ const Register = () => {
       >
         {({ handleSubmit }) => {
           return (
-            <div className="card-register">
-              <div className="ml-4">
-                {" "}
-                <h1>Register</h1>{" "}
-              </div>
+            <div className="container">
+             
+   <h1>Register</h1>{" "}
+              
               <Form onSubmit={handleSubmit}>
-                <div className="card-body mx-4">
-                  <div className="input-container">
-                    {/* <label>Username</label> */}
-
+                <div className="tex_field">
                     <input
                       placeholder="username"
                       type="text"
@@ -36,8 +32,9 @@ const Register = () => {
                       id="username"
                       className="mb-4"
                     />
+                  </div>
 
-                    {/* <label>Email</label> */}
+                  <div className='tex_field'> 
                     <input
                       placeholder="Email"
                       className="mb-4"
@@ -45,8 +42,9 @@ const Register = () => {
                       //   class="form-control"
                       id="email"
                     />
+                    </div>
 
-                    {/* <label>Password</label> */}
+                  <div className='tex_field'>
                     <input
                       placeholder="password"
                       className="mb-4"
@@ -54,15 +52,15 @@ const Register = () => {
                       //   class="form-control"
                       id="password"
                     />
-                  </div>
-
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                  >
+                    </div>
+                 
+                <div className='btn'> 
+                  <button type="button">
                     Register
                   </button>
-                </div>
+                  </div>
+                  <div className='sig_link'> Not a member ?<a href='#'> Sign Up</a> </div>
+                
               </Form>
             </div>
           );

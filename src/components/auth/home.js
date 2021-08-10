@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import './home.scss'
 
 const Home = () => {
   return (
-    <div>
+    <div className='home'> 
       <Link to="/home">
         <img src="ticketmasterimg.png" alt="" />
       </Link>
