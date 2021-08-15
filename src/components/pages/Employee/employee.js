@@ -1,10 +1,19 @@
 import React from "react";
+import { useHistory } from 'react-router-dom';
 
 const Employee = () => {
+
+  const history = useHistory()
+
+  const handleClick = ()=>{
+    history.push('/addemployee')
+    console.log('employeeClick')
+  }
+
   return (
     <div>
       <h1>Employees </h1>{" "}
-      <button>Add Employee</button>
+      <button onClick={handleClick}>Add Employee</button>
       <table class="table table-borderless">
         <thead>
           <tr>

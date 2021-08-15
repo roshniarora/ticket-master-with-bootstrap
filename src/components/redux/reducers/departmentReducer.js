@@ -15,8 +15,15 @@ const departmentReducer = (
         department: action.payload,
       };
 
+      
+        case types.GET_DEPARTMENT_BY_ID:
+          return {
+            ...state,
+            department: action.payload,
+          };
+
     default:
       return { ...state };
   }
 };
-export default departmentReducer;
+export default departmentReducer

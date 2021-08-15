@@ -1,28 +1,31 @@
-import React from "react";
-import { Formik, Form, Field } from "formik";
-import { postCustomer } from "../../redux/actions/customerAction";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router";
-// import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import React , {useEffect} from 'react'
+import {Field, Form , Formik} from 'formik'
+import { useDispatch, useSelector } from "react-redux";
+import {  updateCustomer } from '../../redux/actions/customerAction';
+import { useHistory, useParams } from 'react-router';
+import { GET_CUSTOMERBYID } from '../../redux/store/constant';
 
+const CustomerEdit = () =>{
 
-const CustomerAdd = () => {
- 
     const dispatch = useDispatch()
     const history = useHistory()
-  return (
-    <div>
-      
-      <Formik
+    // const params = useParams()
+    const customers = useSelector(state => state.customer.customers)
+
+   
+    return(
+        <div>
+
+<Formik
         initialValues={{
           name: "",
           email: "",
           mobile: "",
         }}
-        onSubmit={(values, {resetForm}) => {
+        onSubmit={(values) => {
           console.log(values);
-          resetForm({values:''})
-          dispatch(postCustomer(values, history))
+        //   resetForm({values:''})
+          dispatch(updateCustomer(customers._id, values, history))
         }}
       >
         {({ handleSubmit }) => (
@@ -60,10 +63,8 @@ const CustomerAdd = () => {
         )}
       </Formik>
 
-    </div>
-  );
-};
-export default CustomerAdd;
+        </div>
+    )
+}
 
-
-
+export default CustomerEdit

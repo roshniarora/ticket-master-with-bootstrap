@@ -14,6 +14,11 @@ import Home from "./components/auth/home";
 import Register from "./components/auth/register";
 import Login from "./components/auth/login";
 import CustomerAdd from "./components/pages/customer/addCustomer";
+import AddEmployee from "./components/pages/Employee/addEmployee";
+import CustomerShow from "./components/pages/customer/showCustomer";
+import DepartmentShow from "./components/pages/Department/showDepartment";
+import CustomerEdit from "./components/pages/customer/editCustomer";
+
 
 function App() {
   return (
@@ -21,6 +26,7 @@ function App() {
       <div>
         <Navbar />
         <Layout />
+        {/* <Modalll /> */}
         <Layout>
           <Route
             path="/home"
@@ -43,17 +49,38 @@ function App() {
             exact={true}
           />
           <Route
-            path="/addcustomers"
+            path="/addcustomer"
             component={CustomerAdd}
+            exact={true}
+          />
+          <Route
+            path="/customer/:id"
+            component={CustomerShow}
+            exact={true}
+          />
+           <Route
+            path="/editcustomer/:id"
+            component={CustomerEdit}
+            exact={true}
           />
           <Route
             path="/department"
             component={Department}
             exact={true}
           />
+           <Route
+            path="/department/:id"
+            component={DepartmentShow}
+            exact={true}
+          />
           <Route
             path="/employee"
             component={Employee}
+            exact={true}
+          />
+           <Route
+            path="/addemployee"
+            component={AddEmployee}
             exact={true}
           />
           <Route

@@ -10,17 +10,22 @@ const customerReducer = (
   action
 ) => {
   switch (action.type) {
-    case types.GET_CUSTOMERS:
+    case types.GET_CUSTOMER:
       return {
         ...state,
         customers: action.payload,
       };
 
-    case types.GET_CUSTOMERS:
+    case types.GET_CUSTOMER:
       return {
         ...state,
         customers: action.payload,
       };
+      case types.GET_CUSTOMERBYID:
+        return {
+          ...state,
+          customers: action.payload,
+        };
 
     default:
       return { ...state };

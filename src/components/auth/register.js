@@ -14,7 +14,7 @@ const Register = () => {
           password: "",
         }}
         onSubmit={(values) => {
-          console.log(values);
+          console.log(values, 'post');
         }}
       >
         {({ handleSubmit }) => {

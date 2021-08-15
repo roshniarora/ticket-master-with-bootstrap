@@ -47,11 +47,11 @@ const Login = () => {
                   </div>
                   {/* <div className='pass'><h3>Forgot Password</h3></div> */}
 
-                  <div className='btn'> 
-                  <button type="button">
+                  <button type="button" className='btn'> 
+                  
                     Login
+                  
                   </button>
-                  </div>
                     <div className='sig_link'> Not a member ?<a href='#'> Sign Up</a> </div>
                 
               </Form>
