@@ -8,12 +8,12 @@ const Department = () => {
   const history = useHistory()
   const dispatch = useDispatch()
 
-  const departments = useSelector(state =>state.department.department)
+  const departments = useSelector(state =>state.department)
 
 useEffect(()=>{
   dispatch(getDepartment())
   // props.getDepartment()
-}, []);
+}, [dispatch]);
 
 console.log('depCompData', departments)
 
@@ -39,7 +39,7 @@ return (
        <div>
         <table class="table table-borderless">
           {
-            departments && departments.map((ele)=>(
+            departments && departments?.departments.map((ele)=>(
               <tr>
                 <td> {ele.department}  
                 <button onClick={()=>handleClickShow(ele._id)}>show</button> 
@@ -62,8 +62,10 @@ return (
         }}
       >
         {({ handleSubmit }) => (
+          
           <Form onSubmit={handleSubmit}>
-            <label> Add Department</label>
+            {/* <label> Add Department</label> */}
+           
             <Field
               type="text"
               name="department"
@@ -71,8 +73,10 @@ return (
               //  onBlur={handleBlur}
               //  value={values.email}
             />
+            
              <button type="submit">Add</button>
           </Form>
+          
         )}
       </Formik>
      

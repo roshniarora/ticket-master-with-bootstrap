@@ -18,6 +18,8 @@ import AddEmployee from "./components/pages/Employee/addEmployee";
 import CustomerShow from "./components/pages/customer/showCustomer";
 import DepartmentShow from "./components/pages/Department/showDepartment";
 import CustomerEdit from "./components/pages/customer/editCustomer";
+import AddTicket from "./components/pages/Ticket/addTicket";
+import EmployeeShow from "./components/pages/Employee/showEmployee";
 
 
 function App() {
@@ -28,6 +30,9 @@ function App() {
         <Layout />
         {/* <Modalll /> */}
         <Layout>
+
+        
+
           <Route
             path="/home"
             component={Home}
@@ -83,10 +88,22 @@ function App() {
             component={AddEmployee}
             exact={true}
           />
+
+            <Route
+            path="/employee/:id"
+            component={EmployeeShow}
+            exact={true}
+          />
+          
           <Route
             path="/ticket"
             component={Ticket}
-            // exact={true}
+            exact={true}
+          />
+          <Route
+            path="/addticket"
+            component={AddTicket}
+            exact={true}
           />
         </Layout>
       </div>

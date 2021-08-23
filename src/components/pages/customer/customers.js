@@ -6,7 +6,7 @@ import { deleteCustomerById, getCustomer } from "../../redux/actions/customerAct
 // import CustomerAdd from "./addCustomer";
 // import addCustomer from '../customer/addCustomer'
 
-const Customer = (props) => {
+const Customer = () => {
  
   const history = useHistory();
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const Customer = (props) => {
   useEffect(() => {
     // props.getCustomer()
     dispatch(getCustomer())
-  }, []);
+  }, [dispatch]);
 
   console.log(customers,'prtopsdta')
 
@@ -55,7 +55,7 @@ const Customer = (props) => {
         </thead>
         <tbody>
           {
-            customers.map((ele)=>{
+            customers?.map((ele)=>{
               return(
                 <tr>
                   <td>{ele.id}</td>
@@ -64,7 +64,7 @@ const Customer = (props) => {
                 <td> {ele.mobile} </td>
                 
                 <td>{ele.action}<button onClick={()=>handleClickShow(ele._id)}>Show</button></td>
-                <td><button onClick={()=> handleClickDelete(ele._id)}>Delete</button></td>
+                <td>{ele.remove}<button onClick={()=> handleClickDelete(ele._id)}>Delete</button></td>
               </tr>
               )
              

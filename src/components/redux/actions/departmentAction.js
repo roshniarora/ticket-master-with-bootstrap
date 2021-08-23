@@ -1,5 +1,5 @@
 import axios from "../../config/axios"
-import *as types  from "../store/constant"
+import * as types  from "../store/constant"
 
 
 const DepartmentDispatch = (cust, data) =>{
@@ -8,6 +8,7 @@ const DepartmentDispatch = (cust, data) =>{
         payload: data
     }
 }
+// GEt all Customer
 
 export const getDepartment = () =>async(dispatch)=>{
     try{
@@ -22,6 +23,8 @@ dispatch(DepartmentDispatch(
     }
 }
 
+// post customer
+
 export const postDepartment = (data,history) =>async(dispatch)=>{
     try{
         const res = await axios.post('/department', data)
@@ -31,6 +34,8 @@ export const postDepartment = (data,history) =>async(dispatch)=>{
         console.log(err)
     }
 }
+
+// get customer by ID
 
 export const showDepartmentById = (id) => async(dispatch) =>{
 try{
@@ -47,8 +52,9 @@ catch(err){
 
     export const updateDepartmentById = (id , data, history) => (dispatch) => {
         try{
-            const res = axios.put(`/department/${id}`, data)
-            if(res.data) return (history.push('/department'))
+             axios.put(`/department/${id}`, data)
+            // if(res.data) return (history.push('/department'))
+            dispatch(history.push('/department'))
         }
         catch(err){
             console.log(err)

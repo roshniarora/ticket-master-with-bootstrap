@@ -2,6 +2,7 @@ import * as types from "../store/constant";
 
 const initialState = {
   customers: [],
+  customer:{},
   isloading: false,
 };
 
@@ -15,16 +16,11 @@ const customerReducer = (
         ...state,
         customers: action.payload,
       };
-
-    case types.GET_CUSTOMER:
-      return {
-        ...state,
-        customers: action.payload,
-      };
-      case types.GET_CUSTOMERBYID:
+      
+      case types.GET_CUSTOMER_BY_ID:
         return {
           ...state,
-          customers: action.payload,
+          customer: action.payload,
         };
 
     default:

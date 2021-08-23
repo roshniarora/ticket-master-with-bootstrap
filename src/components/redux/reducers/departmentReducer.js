@@ -1,7 +1,8 @@
 import * as types from "../store/constant";
 
 const initialState = {
-  department: [],
+  departments: [],
+  department: {},
 };
 
 const departmentReducer = (
@@ -12,7 +13,7 @@ const departmentReducer = (
     case types.GET_DEPARTMENT:
       return {
         ...state,
-        department: action.payload,
+        departments: action.payload,
       };
 
       
@@ -26,4 +27,4 @@ const departmentReducer = (
       return { ...state };
   }
 };
-export default departmentReducer
+export default departmentReducer;

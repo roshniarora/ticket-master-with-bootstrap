@@ -1,14 +1,20 @@
 import * as types from "../store/constant";
 
 const initialState = {
-  employees: [],
+  employee: [],
 };
 const employeeReducer = (
   state = initialState,
   action
 ) => {
   switch (action.type) {
-    case types.GET_EMPLOYEE:
+    case 'GET_EMPLOYEE':
+      return {
+        ...state,
+        employee: action.payload,
+      };
+
+      case types.GET_EMPLOYEE_BY_ID:
       return {
         ...state,
         employee: action.payload,

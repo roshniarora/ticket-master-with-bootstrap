@@ -29,7 +29,7 @@ export const getCustomer =
   // POST CUSTOMERS
 
   export const postCustomer =
-  (data, history) => async (dispatch) => {
+  (data, history) => async () => {
     try {
       const res = await axios.post("/customer" ,data);
       console.log("postcust", res.data);
@@ -48,7 +48,7 @@ export const getCustomer =
       console.log("custdatabyid", res.data);
       dispatch(
         Customerdispatch(
-          types.GET_CUSTOMERBYID,
+          types.GET_CUSTOMER_BY_ID,
           res.data
         )
       );
@@ -65,7 +65,7 @@ export const getCustomer =
       const res = await axios.put(`/customer/${id}`, data);
       console.log("custdupdate", res.data);
       if(res.data) return (history.push('/customer'))
-      // dispatch(getCustomer())
+      dispatch(getCustomer())
       
     } catch (err) {
       console.log(err);

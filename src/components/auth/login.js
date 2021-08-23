@@ -1,5 +1,6 @@
 import React from "react";
 import { Formik, Form } from "formik";
+import { Link } from "react-router-dom"
 import './login.scss'
 
 const Login = () => {
@@ -52,7 +53,7 @@ const Login = () => {
                     Login
                   
                   </button>
-                    <div className='sig_link'> Not a member ?<a href='#'> Sign Up</a> </div>
+                    <div className='sig_link'> Not a member ?<Link to='/'> Sign Up</Link> </div>
                 
               </Form>
             </div>
