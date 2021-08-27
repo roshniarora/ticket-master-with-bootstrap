@@ -1,16 +1,18 @@
 import React, { useEffect } from 'react'
 import { Formik, Form, Field } from "formik";
 import { useDispatch , useSelector} from 'react-redux';
-import { postEmployee } from '../../redux/actions/employeeAction';
+import { updateEmployee } from '../../redux/actions/employeeAction';
 import { useHistory } from 'react-router';
 import '../../auth/login.scss'
 import { getDepartment } from '../../redux/actions/departmentAction';
 
-const AddEmployee = () =>{
+
+const EmployeeEdit = () =>{
 
 const dispatch = useDispatch()
 const history = useHistory()
 const departments = useSelector(state =>state.department.departments)
+const employees = useSelector(state => state.employee.employee)
 
 useEffect(()=>{
 dispatch(getDepartment())
@@ -18,17 +20,18 @@ dispatch(getDepartment())
 
     return(
        <div>
-         <h1>EMPLOYESS</h1>
+         <h1>EMPLOYESS Edit </h1>
            <Formik
         initialValues={{
-          name: "",
-          email: "",
-          mobile: "",
-          department:""
+          name: employees.name || "",
+          email: employees.email || "",
+          mobile: employees.mobile || "",
+          department: employees.department || ""
         }}
+        enableReinitialize
         onSubmit={(values) => {
           console.log(values);
-          dispatch(postEmployee( values, history ))
+          dispatch(updateEmployee( employees._id ,values, history ))
           
         }}
       >
@@ -68,8 +71,9 @@ dispatch(getDepartment())
 
               <div className='tex_field'> 
               <label>department</label>
+             
 
-          <Field name="department" component="select" defaultValue="select Department">
+          <Field name="department" component="select">
               {
                 departments.map((ele)=>{
                   console.log('dep', ele)
@@ -95,7 +99,7 @@ dispatch(getDepartment())
         
     
 }
-export default AddEmployee
+export default EmployeeEdit
 
 
       

@@ -1,6 +1,6 @@
 import * as types from "../store/constant";
 const initialState = {
-  ticket: [],
+  tickets: [],
 };
 const ticketReducer = (
   state = initialState,

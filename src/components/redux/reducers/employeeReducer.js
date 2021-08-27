@@ -1,7 +1,8 @@
 import * as types from "../store/constant";
 
 const initialState = {
-  employee: [],
+  employees: [],
+  employee:{}
 };
 const employeeReducer = (
   state = initialState,
@@ -11,7 +12,7 @@ const employeeReducer = (
     case 'GET_EMPLOYEE':
       return {
         ...state,
-        employee: action.payload,
+        employees: action.payload,
       };
 
       case types.GET_EMPLOYEE_BY_ID:

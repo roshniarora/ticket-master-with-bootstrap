@@ -5,7 +5,7 @@ import './home.scss'
 const Home = () => {
   return (
     <div className='home'> 
-      <Link to="/home">
+      <Link to="/">
         <img src="ticketmasterimg.png" alt="" />
       </Link>
     </div>

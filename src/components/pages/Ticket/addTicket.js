@@ -1,29 +1,37 @@
-import React, { useEffect } from 'react'
+import React, { useEffect  , useState} from 'react'
 import { Formik, Form, Field } from "formik";
 import Select from 'react-select';
 import { useDispatch , useSelector} from 'react-redux';
-import { getEmployee, postEmployee } from '../../redux/actions/employeeAction';
+import { getEmployee} from '../../redux/actions/employeeAction';
 import { useHistory } from 'react-router';
 import '../../auth/login.scss'
 import { getCustomer } from '../../redux/actions/customerAction';
 import { getDepartment } from '../../redux/actions/departmentAction';
+import { postTicket } from '../../redux/actions/ticketAction';
 
 
 const AddTicket = () =>{
+
+  const [selectOtion , setSelectOption] =useState([])
 
 const dispatch = useDispatch()
 const history = useHistory()
 const customers = useSelector(state => state.customer.customers)
 const departments = useSelector(state =>state.department.departments)
-const employees = useSelector(state => state.employee.employee)
+const employees = useSelector(state => state.employee.employees)
 
 useEffect(()=>{
 dispatch(getCustomer())
  dispatch(getDepartment())
  dispatch(getEmployee())
 
-},[])
-
+},[dispatch])
+useEffect(()=>{
+employees.map((ele)=> selectOtion.push({value: ele._id , label: ele.name}))
+// setSelectOption(employees.map((ele)=> [{value: ele._id , label: ele.name}]))
+}, [employees])
+console.log(employees, 'tick_emp')
+console.log(selectOtion , 'option')
     return(
        <div>
          <h1>TICKETS</h1>
@@ -32,7 +40,7 @@ dispatch(getCustomer())
           code: "",
           customer: "",
           department:"",
-          employee:"",
+          employee:[],
           message:"",
           priority:""
 
@@ -40,52 +48,30 @@ dispatch(getCustomer())
         }}
         onSubmit={(values) => {
           console.log(values);
+          dispatch(postTicket(values , history))
         }}
       >
         {({ handleSubmit }) => (
-         <div className='container'>
+         <div className='container text-right' >
            <h1> Add Ticket </h1>
           <Form onSubmit={handleSubmit}>
-          
-          <div className='tex_field'> 
-            
-            {/* <Field
+
+         < div className='tex_field'> 
+            <Field
               type="text"
               name="code"
               placeholder='Code'
-            />  */}
-            {/* {tickets.code} */}
-            <br />
-
+              
+            /> <br />
             </div>
-
-
-            {/* <div className='tex_field'>
-              <select
-              type="text"
-              name="customer"
-              placeholder='customer'
-            >
-              {
-                customers.map((ele)=>{
-                  return(
-                    
-                    
-                      <option> {ele.name} </option>
-                      
-                   
-                    
-                  )
-                })
-              }
-              </select>
-            <br />
-            </div> */}
-
-<Field name="customer" component="select">
+    
+            < div className='tex_field'> 
+            <Field name="customer" component="select" >
+            <option value='' disabled>Select</option>
+  
               {
                 customers?.map((ele)=>{
-                  console.log('cusst', ele)
+                  // console.log('cusst', ele)
                   return(
                     <option value={ele._id}>  {ele.name} </option>
                   )
@@ -94,29 +80,13 @@ dispatch(getCustomer())
 
 
 </Field>
-
-            
-            {/* <div className='tex_field'> 
-              <select
-              type="text"
-              name="department"
-              placeholder='Department'
-            >
+</div>
+< div className='tex_field'> 
+<Field name="department" component="select" placeholder='select'>
+      <option value='' disabled>Select</option>
               {
                 departments.map((ele)=>{
-                  return(
-                    <option> {ele.department} </option>
-                  )
-                })
-              }
-              </select>
-            <br />
-            </div> */}
-
-<Field name="department" component="select">
-              {
-                departments.map((ele)=>{
-                  console.log('dep', ele)
+                  // console.log('dep', ele)
                   return(
                     <option value={ele._id}>  {ele.department} </option>
                   )
@@ -125,62 +95,44 @@ dispatch(getCustomer())
 
 
 </Field>
-
-            {/* <div className='tex_field'> 
-              
-              <select
-              type="text"
-              name="employee"
-              placeholder='Employee'
-              mode='multiple'
-            >
-              {
-                employees.map((ele)=>{
-                  return(
-                    <option> {ele.name} </option>
-                  )
-                })
-              }
-              </select>
-            <br />
-            </div> */}
-
-<Select
+</div>
+< div className='tex_field'> 
+<Field
     // defaultValue={[colourOptions[2], colourOptions[3]]}
     isMulti
     name="employee"
-    options={employees}
+    options={selectOtion}
     className="basic-multi-select"
     classNamePrefix="select"
+    component={Select}
+    
   />
+  </div>
+  
 
             <div className='tex_field'>
-         {"  "}   <Field as='textarea' type="text" name="message" placeholder="Message" />
-
-              
+           <Field as='textarea' type="text" name="message" placeholder="Message" />
 
             </div>
 
-            <div id="my-radio-group">priority</div> <br />
-          <div role="group" aria-labelledby="my-radio-group">
             <label>
-              <Field type="radio" name="picked" value="high" />
-              High
-            </label>
-            <br/> 
-            <label>
-              <Field type="radio" name="picked" value="medium" />
-              Medium
+              <Field type="radio" name="priority" value="low" />
+              low
             </label>
             <br/>
             <label>
-              <Field type="radio" name="picked" value="low" />
-              Low
+              <Field type="radio" name="priority" value="medim" />
+              medim
             </label>
-            {/* <div>Picked: {values.priority}</div> */}
-          </div>
+            <br/>
+            <label>
+              <Field type="radio" name="priority" value="high" />
+              high
+            </label>
+            <br/>
+            <br/>
          
-            <button type='submit'>Submit</button>
+            <button  type='submit'>Submit</button>
        
           </Form>
           </div>

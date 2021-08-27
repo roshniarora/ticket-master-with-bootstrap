@@ -53,7 +53,7 @@ const Login = () => {
                     Login
                   
                   </button>
-                    <div className='sig_link'> Not a member ?<Link to='/'> Sign Up</Link> </div>
+                    <div className='sig_link'> Not a member ?<Link to='/register'> Sign Up</Link> </div>
                 
               </Form>
             </div>

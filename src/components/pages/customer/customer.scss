@@ -1,0 +1,17 @@
+.cust-container {
+  margin-top: 1rem;
+}
+.cust-table-container {
+  max-width: 1140px;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  scroll-behavior: smooth;
+  display: block;
+  position: relative;
+  height: 60vh;
+  overflow: auto;
+  line-height: 1.5;
+}

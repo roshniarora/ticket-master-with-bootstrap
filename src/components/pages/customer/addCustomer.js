@@ -29,7 +29,7 @@ const CustomerAdd = () => {
 
 
         {({ handleSubmit }) => (
-         <div className='container'>
+         <div >
            <h1> Add Customer  </h1>
 
            

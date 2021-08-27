@@ -10,17 +10,21 @@ const EmployeeDispatch = (cust, data) =>{
 
  // Get All Employess
 
-export const getEmployee = () => async (dispatch) =>{
-    try{
-        const res = await axios.get("/employee")
-        console.log('getemploy', res.data)
-        dispatch(EmployeeDispatch(types.GET_EMPLOYEE, res.data))
-    }
-    catch(err){
-        console.log(err)
-    }
-}
-
+ export const getEmployee =
+ () => async (dispatch) => {
+   try {
+     const res = await axios.get("/employee");
+     console.log("imp action data", res.data);
+     dispatch(
+       EmployeeDispatch(
+         types.GET_EMPLOYEE,
+         res.data
+       )
+     );
+   } catch (err) {
+     console.log(err);
+   }
+ };
 
  // POST Employee
 
@@ -53,8 +57,10 @@ export const updateEmployee = (id,data , history) => async(dispatch) =>{
     try{
      const res = await axios.put(`/employee/${id}`, data)
      console.log('employee edit data', res.data)
-     if(res.data) return history.push('/employee')   
-     dispatch(getEmployee())          
+    //  if(res.data) return history.push('/employee')   
+    //  dispatch(getEmployee())    
+    dispatch(history.push('/employee')) 
+    // dispatch(getEmployee())       
     }
     catch(err){
         console.log(err)

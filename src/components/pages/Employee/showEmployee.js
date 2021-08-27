@@ -17,16 +17,16 @@ useEffect(()=>{
 },[params.id , dispatch])
 console.log(params.id, 'ID')
 
-// const handleClickEdit = (id) =>{
-//     history.push(`/showcustomer/${id}`)
-// }
+const handleClickEdit = (id) =>{
+    history.push(`/editemployee/${id}`)
+}
     return(
         <div>
            
             <h1>employee detail</h1>
             <div>{employees.name} </div>
             <div> {employees.email} </div>
-            {/* <button onClick={()=>handleClickEdit(employees._id)}> Edit</button> */}
+            <button onClick={()=>handleClickEdit(employees._id)}> Edit</button>
         </div>
     )
 }

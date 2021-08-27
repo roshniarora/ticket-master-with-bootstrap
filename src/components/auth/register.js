@@ -60,7 +60,7 @@ const Register = () => {
                     Register
                   </button>
                   </div>
-                  <div className='sig_link'> Not a member ?<Link to ='/'> Sign Up</Link> </div>
+                  <div className='sig_link'> Already a member ?<Link to ='/login'> Sign In</Link> </div>
                 
               </Form>
             </div>

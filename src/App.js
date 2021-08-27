@@ -20,91 +20,37 @@ import DepartmentShow from "./components/pages/Department/showDepartment";
 import CustomerEdit from "./components/pages/customer/editCustomer";
 import AddTicket from "./components/pages/Ticket/addTicket";
 import EmployeeShow from "./components/pages/Employee/showEmployee";
+import EmployeeEdit from "./components/pages/Employee/editEmployee";
 
 
 function App() {
+
+const token = localStorage.getItem("token")
+
   return (
     <BrowserRouter>
       <div>
         <Navbar />
-        <Layout />
-        {/* <Modalll /> */}
+      
         <Layout>
 
         
 
-          <Route
-            path="/home"
-            component={Home}
-            exact={true}
-          />
-          <Route
-            path="/login"
-            component={Login}
-            exact={true}
-          />
-          <Route
-            path="/Register"
-            component={Register}
-            exact={true}
-          />
-          <Route
-            path="/customer"
-            component={Customer}
-            exact={true}
-          />
-          <Route
-            path="/addcustomer"
-            component={CustomerAdd}
-            exact={true}
-          />
-          <Route
-            path="/customer/:id"
-            component={CustomerShow}
-            exact={true}
-          />
-           <Route
-            path="/editcustomer/:id"
-            component={CustomerEdit}
-            exact={true}
-          />
-          <Route
-            path="/department"
-            component={Department}
-            exact={true}
-          />
-           <Route
-            path="/department/:id"
-            component={DepartmentShow}
-            exact={true}
-          />
-          <Route
-            path="/employee"
-            component={Employee}
-            exact={true}
-          />
-           <Route
-            path="/addemployee"
-            component={AddEmployee}
-            exact={true}
-          />
-
-            <Route
-            path="/employee/:id"
-            component={EmployeeShow}
-            exact={true}
-          />
-          
-          <Route
-            path="/ticket"
-            component={Ticket}
-            exact={true}
-          />
-          <Route
-            path="/addticket"
-            component={AddTicket}
-            exact={true}
-          />
+          <Route path="/" component={Home} exact={true}/>
+          <Route path="/login" component={Login} exact={true}/>
+          <Route path="/Register" component={Register} exact={true}/>
+          <Route path="/customer" component={Customer} exact={true}/>
+          <Route path="/addcustomer" component={CustomerAdd} exact={true}/>
+          <Route path="/customer/:id" component={CustomerShow} exact={true}/>
+           <Route path="/editcustomer/:id" component={CustomerEdit} exact={true}/>
+          <Route path="/department" component={Department} exact={true}/>
+           <Route path="/department/:id" component={DepartmentShow} exact={true}/>
+          <Route path="/employee" component={Employee} exact={true}/>
+           <Route path="/addemployee" component={AddEmployee} exact={true}/>
+           <Route path="/employee/:id" component={EmployeeShow} exact={true}/>
+            <Route path="/editemployee/:id" component={EmployeeEdit}exact={true}/>
+          <Route path="/ticket" component={Ticket} exact={true}/>
+          <Route path="/addticket" component={AddTicket}exact={true}/>
         </Layout>
       </div>
     </BrowserRouter>

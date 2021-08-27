@@ -1,59 +1,62 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import './navbar.scss'
 
 const Navbar = () => {
   return (
-    <div>
-      <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <Link to="/" class="navbar-brand">
+    <div className='nav-container'>
+      <nav className="navbar navbar-expand-sm navbar-light bg-light" >
+        <div className='float-left'>
+
           <img src="" alt="" />
           Ticket Master
-        </Link>
-        {/* <h2>Ticket Master</h2> */}
-        <ul class="navbar-nav">
-          <li class="nav-item">
+          
+          </div>
+        <ul className="navbar-nav">
+          <li className="nav-item">
             {" "}
-            <Link to="/home" class="nav-link">
-              Home
+            <Link to="/" className="nav-link">
+              
             </Link>
           </li>
 
-          <li class="nav-item">
+          <li className="nav-item">
             {" "}
-            <Link to="/register" class="nav-link">
+            <Link to="/register" className="nav-link">
               Register
             </Link>
           </li>
-          <li class="nav-item">
+          <li className="nav-item">
             {" "}
-            <Link to="/login" class="nav-link">
+            <Link to="/login" className="nav-link">
               Login
             </Link>
           </li>
+          
           <li class="nav-item">
             {" "}
-            <Link to="/customer" class="nav-link">
+            <Link to="/customer" className="nav-link">
               Customer
             </Link>
           </li>
-          <li class="nav-item">
+          <li className="nav-item">
             {" "}
             <Link
               to="/department"
-              class="nav-link"
+              className="nav-link"
             >
               Department
             </Link>
           </li>
-          <li class="nav-item">
+          <li className="nav-item">
             {" "}
-            <Link to="/employee" class="nav-link">
+            <Link to="/employee" className="nav-link">
               Employee
             </Link>
           </li>
-          <li class="nav-item">
+          <li className="nav-item">
             {" "}
-            <Link to="/ticket" class="nav-link">
+            <Link to="/ticket" className="nav-link">
               Tickets
             </Link>
           </li>
