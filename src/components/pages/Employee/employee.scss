@@ -1,20 +1,17 @@
-.emp-show-btn{
-    width: 90%;
-    background: #2691d9;
-    border: 1px solid;
-    border-radius: 25px;
-    height: 40px;
-    color: #e9f4fb;
-    cursor: pointer;
-    outline: none;
+.emp-container {
+  margin-top: 1rem;
 }
-.emp-dlt-btn{
-    width: 90%;
-    background: #eb2626c7;
-    border: 1px solid;
-    border-radius: 25px;
-    height: 40px;
-    color: #e9f4fb;
-    cursor: pointer;
-    outline: none;
+.emp-table-con {
+  max-width: 1140px;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  scroll-behavior: smooth;
+  display: block;
+  position: relative;
+  height: 60vh;
+  overflow: auto;
+  line-height: 1.5;
 }

@@ -5,11 +5,9 @@ import {
   deleteCustomerById,
   getCustomer,
 } from "../../redux/actions/customerAction";
-import "../../utility/button.scss";
 import Button from "../../utility/button";
-import "./customer.scss";
-
 import PageHeader from "../../utility/pageHeader";
+import "./customer.scss";
 
 const Customer = () => {
   const history = useHistory();
@@ -49,14 +47,6 @@ const Customer = () => {
           count={customers.length}
           btntitle="Add Customer"
         />
-        {/* <h2>
-          Customers - {customers.length}
-          <AddButton
-            addButton="btn-add"
-            handleActionClick={handleClick}
-            title="Add Button"
-          />
-        </h2> */}
       </div>
 
       <div className="mt-2 cust-table-container ">
@@ -83,7 +73,6 @@ const Customer = () => {
                   <td>
                     {ele.action}
                     <Button
-                      custStyle="show-btn"
                       handleAction={() => handleClickShow(ele._id)}
                       title="Show"
                     />
@@ -91,7 +80,6 @@ const Customer = () => {
                   <td>
                     {ele.remove}
                     <Button
-                      custStyle="delete-btn"
                       handleAction={() => handleClickDelete(ele._id)}
                       title="Remove"
                     />

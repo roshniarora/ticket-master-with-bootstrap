@@ -2,14 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./home.scss";
 
-const Home = () => {
+const Dashboard = () => {
   return (
     <div className="home">
-      <Link to="/home">
+      <Link to="/">
         <img src="ticketmasterimg.png" alt="" />
       </Link>
     </div>
   );
 };
 
-export default Home;
+export default Dashboard;

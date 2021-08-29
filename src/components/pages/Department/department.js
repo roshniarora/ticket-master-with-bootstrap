@@ -7,8 +7,9 @@ import {
   postDepartment,
 } from "../../redux/actions/departmentAction";
 import { useHistory } from "react-router-dom";
-import "../../utility/button.scss";
 import Button from "../../utility/button";
+
+import PageHeader from "../../utility/pageHeader";
 
 const Department = () => {
   const history = useHistory();
@@ -18,7 +19,6 @@ const Department = () => {
 
   useEffect(() => {
     dispatch(getDepartment());
-    // props.getDepartment()
   }, [dispatch]);
 
   console.log("depCompData", departments);
@@ -42,10 +42,9 @@ const Department = () => {
   return (
     <div>
       <div>
-        {" "}
-        <h1>Department - {departments.length}</h1>
+        <PageHeader title="Department -" count={departments.length} />
       </div>
-      <div>
+      <div className="dep-container">
         <table className="table table-striped">
           <thead>
             <tr>
@@ -60,20 +59,20 @@ const Department = () => {
                   <td> {ele.id} </td>
                   <td> {ele.department} </td>
                   <td>
-                    {" "}
-                    <Button
-                      custStyle="show-btn"
-                      handleAction={() => handleClickShow(ele._id)}
-                      title=" Show"
-                    />
+                    <div className="dep-btn">
+                      <Button
+                        handleAction={() => handleClickShow(ele._id)}
+                        title="Show"
+                      />
+                    </div>
                   </td>
                   <td>
-                    {" "}
-                    <Button
-                      custStyle="delete-btn"
-                      handleAction={() => handleClickDelete(ele._id)}
-                      title="Remove"
-                    />{" "}
+                    <div className="dep-btn-remove">
+                      <Button
+                        handleAction={() => handleClickDelete(ele._id)}
+                        title="Remove"
+                      />
+                    </div>
                   </td>
                 </tr>
               ))}

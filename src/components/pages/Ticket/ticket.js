@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { getTicket } from "../../redux/actions/ticketAction";
 import "../../utility/button.scss";
 import Button from "../../utility/button";
+import PageHeader from "../../utility/pageHeader";
 
 const Ticket = () => {
   const [checkBox, setCheckBox] = useState(false);
@@ -27,8 +28,12 @@ const Ticket = () => {
   return (
     <div>
       <h1>
-        Tickets
-        {/* <AddButton addButton='btn-add' handleActionClick={handleClick} title='Add Ticket' /> */}
+        <PageHeader
+          btntitle="Add Ticket"
+          handleActionClick={handleClick}
+          title="Tickets"
+          count={tickets.length}
+        />
       </h1>{" "}
       <table class="table table-borderless">
         <thead>

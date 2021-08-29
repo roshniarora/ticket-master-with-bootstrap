@@ -1,22 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import './navbar.scss'
+import "./navbar.scss";
 
 const Navbar = () => {
   return (
-    <div className='nav-container'>
-      <nav className="navbar navbar-expand-sm navbar-light bg-light" >
-        <div className='float-left'>
-
-          <img src="" alt="" />
-          Ticket Master
-          
-          </div>
+    <div className="nav-container">
+      <nav className="navbar navbar-expand-sm navbar-light bg-light">
+        <div className="tick-mast">Ticket Master</div>
         <ul className="navbar-nav">
           <li className="nav-item">
             {" "}
-            <Link to="/" className="nav-link">
-              
+            <Link to="/home" className="nav-link">
+              {" "}
+              Home
             </Link>
           </li>
 
@@ -32,7 +28,7 @@ const Navbar = () => {
               Login
             </Link>
           </li>
-          
+
           <li class="nav-item">
             {" "}
             <Link to="/customer" className="nav-link">
@@ -41,10 +37,7 @@ const Navbar = () => {
           </li>
           <li className="nav-item">
             {" "}
-            <Link
-              to="/department"
-              className="nav-link"
-            >
+            <Link to="/department" className="nav-link">
               Department
             </Link>
           </li>
