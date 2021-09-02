@@ -27,10 +27,11 @@ const AddTicket = () => {
     employees.map((ele) =>
       selectOtion.push({ value: ele._id, label: ele.name })
     );
-    // setSelectOption(employees.map((ele)=> [{value: ele._id , label: ele.name}]))
+    //   // setSelectOption(employees.map((ele)=> [{value: ele._id , label: ele.name}]))
   }, [employees]);
   console.log(employees, "tick_emp");
   console.log(selectOtion, "option");
+
   return (
     <div>
       <h1>TICKETS</h1>
@@ -45,7 +46,7 @@ const AddTicket = () => {
         }}
         onSubmit={(values) => {
           console.log(values);
-          // dispatch(postTicket(values, history));
+          dispatch(postTicket(values, history));
         }}
       >
         {({
@@ -151,7 +152,7 @@ class MySelect extends React.Component {
   handleChange = (value) => {
     console.log(value, "mycomp");
     // this is going to call setFieldValue and manually update values.topcis
-    this.props.onChange("employee", value.value);
+    this.props.onChange("employee", value);
   };
 
   handleBlur = () => {

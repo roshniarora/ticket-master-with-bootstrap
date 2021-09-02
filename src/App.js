@@ -19,7 +19,7 @@ import AddTicket from "./components/pages/Ticket/addTicket";
 import EmployeeShow from "./components/pages/Employee/showEmployee";
 import EmployeeEdit from "./components/pages/Employee/editEmployee";
 import Dashboard from "./components/auth/dashboard";
-// import { PrivateRoute } from "./components/utility/privateRoute";
+import { PrivateRoute } from "./components/utility/privateRoute";
 
 // const location = window.location.pathname;
 function App() {
@@ -32,39 +32,76 @@ function App() {
 
         <Layout>
           <Switch>
-            <Redirect from="/" to="/home" exact />
-            <Route path="/home" component={Home} exact={true} />
-            <Route path="/customer" component={Customer} exact={true} />
-            <Route path="/addcustomer" component={CustomerAdd} exact={true} />
-            <Route path="/customer/:id" component={CustomerShow} exact={true} />
-            <Route
-              path="/editcustomer/:id"
-              component={CustomerEdit}
-              exact={true}
-            />
-            <Route path="/department" component={Department} exact={true} />
-            <Route
-              path="/department/:id"
-              component={DepartmentShow}
-              exact={true}
-            />
-            <Route path="/employee" component={Employee} exact={true} />
-            <Route path="/addemployee" component={AddEmployee} exact={true} />
-            <Route path="/employee/:id" component={EmployeeShow} exact={true} />
-            <Route
-              path="/editemployee/:id"
-              component={EmployeeEdit}
-              exact={true}
-            />
-            <Route path="/ticket" component={Ticket} exact={true} />
-            <Route path="/addticket" component={AddTicket} exact={true} />
+            {token ? (
+              <div>
+                <Redirect from="/" to="/home" exact />
+                <Route path="/home" component={Home} exact={true} />
+                <PrivateRoute
+                  path="/customer"
+                  component={Customer}
+                  exact={true}
+                />
+                <PrivateRoute
+                  path="/addcustomer"
+                  component={CustomerAdd}
+                  exact={true}
+                />
+                <PrivateRoute
+                  path="/customer/:id"
+                  component={CustomerShow}
+                  exact={true}
+                />
+                <PrivateRoute
+                  path="/editcustomer/:id"
+                  component={CustomerEdit}
+                  exact={true}
+                />
+                <PrivateRoute
+                  path="/department"
+                  component={Department}
+                  exact={true}
+                />
+                <PrivateRoute
+                  path="/department/:id"
+                  component={DepartmentShow}
+                  exact={true}
+                />
+                <PrivateRoute
+                  path="/employee"
+                  component={Employee}
+                  exact={true}
+                />
+                <PrivateRoute
+                  path="/addemployee"
+                  component={AddEmployee}
+                  exact={true}
+                />
+                <PrivateRoute
+                  path="/employee/:id"
+                  component={EmployeeShow}
+                  exact={true}
+                />
+                <PrivateRoute
+                  path="/editemployee/:id"
+                  component={EmployeeEdit}
+                  exact={true}
+                />
+                <PrivateRoute path="/ticket" component={Ticket} exact={true} />
+                <PrivateRoute
+                  path="/addticket"
+                  component={AddTicket}
+                  exact={true}
+                />
+              </div>
+            ) : (
+              <div>
+                <Route path="/" component={Dashboard} exact={true} />
+                <Route path="/home" component={Home} exact={true} />
+                <Route path="/login" component={Login} exact={true} />
+                <Route path="/register" component={Register} exact={true} />
+              </div>
+            )}
           </Switch>
-        </Layout>
-
-        <Layout>
-          <Route path="/" component={Dashboard} exact={true} />
-          <Route path="/login" component={Login} exact={true} />
-          <Route path="/Register" component={Register} exact={true} />
         </Layout>
       </div>
     </BrowserRouter>

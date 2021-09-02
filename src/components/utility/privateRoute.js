@@ -9,7 +9,7 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
       localStorage.getItem("token") === undefined ? (
         <Redirect
           to={{
-            pathname: "/",
+            pathname: "/login",
             state: { from: props.location },
           }}
         />

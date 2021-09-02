@@ -1,4 +1,5 @@
 import axios from "../../config/axios";
+import * as types from "../store/constant";
 
 // const auth = (cust, data) => {
 //   return {
@@ -9,13 +10,13 @@ import axios from "../../config/axios";
 
 // Register User
 
-const registerUser = async (data, history) => {
+export const registerUser = async (data, history) => {
   try {
     const res = await axios.post("/register", data);
     if (res.data.hasOwnProperty("error")) return alert(res.data.error);
     else {
       alert("Register Successfully");
-      history.push("/user/login");
+      history.push("/login");
     }
   } catch (err) {
     if (err.response) return alert(err.response.data);
@@ -24,17 +25,37 @@ const registerUser = async (data, history) => {
 
 // Login User
 
-const loginUser = (data, history) => async () => {
+export const loginUser = (data, history) => async (dispatch) => {
   try {
     const res = await axios.post("/login", data);
+    dispatch({ type: types.LOGIN_LOADER, payload: false });
     if (res.data.hasOwnProperty("error")) return alert(res.data.error);
     else {
-      alert("Login Successfully");
       localStorage.setItem("token", res.data.token);
-      history.push("/");
+      alert("Login Successfully");
+      dispatch(history.push("/"));
     }
   } catch (err) {
     console.log(err);
   }
 };
-export { loginUser, registerUser };
+
+// Logout User
+
+export const logoutUser = () => (dispatch) => {
+  localStorage.removeItem("token");
+  alert("Logged out Successfully.");
+  // dispatch({ type: "RESET" });
+  window.location.href = "/";
+};
+
+// export const startLogoutUser = () => (dispatch) => {
+//   axios.delete("/users/logout").then((response) => {
+//     if (response.data.notice) {
+//       alert(response.data.notice);
+//       localStorage.removeItem("token");
+//       // dispatch(setUser({}));
+//       window.location.href = "/";
+//     }
+//   });
+// };
