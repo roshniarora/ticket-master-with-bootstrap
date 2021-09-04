@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "sweetalert2/dist/sweetalert2.all.min.js";
+import "sweetalert2/dist/sweetalert2.min.css";
 import "@popperjs/core";
 import "./index.css";
 import App from "./App";
@@ -15,7 +17,4 @@ const jsx = (
     <App />
   </Provider>
 );
-ReactDOM.render(
-  jsx,
-  document.getElementById("root")
-);
+ReactDOM.render(jsx, document.getElementById("root"));

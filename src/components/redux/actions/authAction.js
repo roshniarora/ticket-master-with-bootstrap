@@ -1,5 +1,6 @@
 import axios from "../../config/axios";
 import * as types from "../store/constant";
+import Swal from "sweetalert2";
 
 // const auth = (cust, data) => {
 //   return {
@@ -15,7 +16,8 @@ export const registerUser = async (data, history) => {
     const res = await axios.post("/register", data);
     if (res.data.hasOwnProperty("error")) return alert(res.data.error);
     else {
-      alert("Register Successfully");
+      // alert("registered successfully");
+      Swal.fire("Good job!", 'Register Successfully"', "success");
       history.push("/login");
     }
   } catch (err) {
@@ -32,7 +34,7 @@ export const loginUser = (data, history) => async (dispatch) => {
     if (res.data.hasOwnProperty("error")) return alert(res.data.error);
     else {
       localStorage.setItem("token", res.data.token);
-      alert("Login Successfully");
+      Swal.fire("Good job!", 'login Successfully"', "success");
       dispatch(history.push("/"));
     }
   } catch (err) {

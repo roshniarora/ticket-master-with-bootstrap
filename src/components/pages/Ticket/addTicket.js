@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
-import Select from "react-select";
 import { useDispatch, useSelector } from "react-redux";
 import { getEmployee } from "../../redux/actions/employeeAction";
 import { useHistory } from "react-router";
@@ -8,12 +7,17 @@ import "../../auth/login.scss";
 import { getCustomer } from "../../redux/actions/customerAction";
 import { getDepartment } from "../../redux/actions/departmentAction";
 import { postTicket } from "../../redux/actions/ticketAction";
+import Multiselect from "multiselect-react-dropdown";
+import "./ticket.scss";
 
 const AddTicket = () => {
-  const [selectOtion, setSelectOption] = useState([]);
+  const [selectOtion] = useState([]);
+  const [selectedValues, setselectedValues] = useState([]);
+  const [employeeIds, setEmployeeIds] = useState([]);
 
   const dispatch = useDispatch();
   const history = useHistory();
+
   const customers = useSelector((state) => state.customer.customers);
   const departments = useSelector((state) => state.department.departments);
   const employees = useSelector((state) => state.employee.employees);
@@ -24,13 +28,25 @@ const AddTicket = () => {
     dispatch(getEmployee());
   }, [dispatch]);
   useEffect(() => {
-    employees.map((ele) =>
-      selectOtion.push({ value: ele._id, label: ele.name })
-    );
+    employees.map((ele) => selectOtion.push({ key: ele._id, label: ele.name }));
     //   // setSelectOption(employees.map((ele)=> [{value: ele._id , label: ele.name}]))
-  }, [employees]);
-  console.log(employees, "tick_emp");
-  console.log(selectOtion, "option");
+  }, [employees, selectOtion]);
+
+  const onSelect = (selectedList, selectedItem) => {
+    console.log(selectedItem, "emply");
+    selectedValues.push(selectedItem.key);
+    employeeIds.push(selectedItem.key);
+  };
+
+  const onRemove = (selectedList, removedItem) => {
+    setEmployeeIds(
+      employeeIds.filter((ele) => {
+        return ele !== removedItem.key;
+      })
+    );
+    console.log(removedItem, "removedItem");
+  };
+  console.log(selectOtion, "selectOtion");
 
   return (
     <div>
@@ -40,23 +56,21 @@ const AddTicket = () => {
           code: "",
           customer: "",
           department: "",
-          employee: [],
+          // employee: [],
           message: "",
           priority: "",
         }}
-        onSubmit={(values) => {
-          console.log(values);
-          dispatch(postTicket(values, history));
+        onSubmit={(values, { resetForm }) => {
+          const newData = { ...values, employee: employeeIds };
+
+          console.log(newData, "newData");
+          resetForm({ newData: "" });
+          // setselectedValues("");
+
+          dispatch(postTicket(newData, history));
         }}
       >
-        {({
-          handleSubmit,
-          setFieldValue,
-          setFieldTouched,
-          values,
-          errors,
-          touched,
-        }) => (
+        {({ handleSubmit }) => (
           <div className="container text-right">
             <h1> Add Ticket </h1>
             <Form onSubmit={handleSubmit}>
@@ -65,9 +79,14 @@ const AddTicket = () => {
               </div>
 
               <div className="tex_field">
-                <Field name="customer" component="select">
-                  <option value="" disabled>
-                    Select
+                <Field
+                  name="customer"
+                  component="select"
+                  class="form-select"
+                  aria-label="Default select example"
+                >
+                  <option value="" selected disabled>
+                    select Customer
                   </option>
 
                   {customers?.map((ele) => {
@@ -78,12 +97,13 @@ const AddTicket = () => {
               </div>
               <div className="tex_field">
                 <Field
+                  class="form-select"
                   name="department"
                   component="select"
                   placeholder="select"
                 >
-                  <option value="" disabled>
-                    Select
+                  <option value="" selected disabled>
+                    select Department
                   </option>
                   {departments.map((ele) => {
                     // console.log('dep', ele)
@@ -91,24 +111,17 @@ const AddTicket = () => {
                   })}
                 </Field>
               </div>
+
               <div className="tex_field">
-                {/* <Select
-                  // defaultValue={[colourOptions[2], colourOptions[3]]}
-                  isMulti
-                  name="employee"
-                  onChange={}
+                <Multiselect
+                  placeholder="Select Employees"
+                  selectedValues={selectedValues || ""}
                   options={selectOtion}
-                  className="basic-multi-select"
-                  classNamePrefix="select"
-                  // component={Select}
-                /> */}
-                <MySelect
-                  value={values.employee?.value}
-                  onChange={setFieldValue}
-                  onBlur={setFieldTouched}
-                  error={errors.employee}
-                  touched={touched.employee}
-                  option={selectOtion}
+                  displayValue="label"
+                  onSelect={onSelect}
+                  onRemove={onRemove}
+                  // defaultValue={selectedOptions}
+                  // closeMenuOnSelect={false}
                 />
               </div>
 
@@ -135,10 +148,10 @@ const AddTicket = () => {
                 <Field type="radio" name="priority" value="high" />
                 high
               </label>
-              <br />
-              <br />
 
-              <button type="submit">Submit</button>
+              <div>
+                <button type="submit">Submit</button>
+              </div>
             </Form>
           </div>
         )}
@@ -147,36 +160,3 @@ const AddTicket = () => {
   );
 };
 export default AddTicket;
-
-class MySelect extends React.Component {
-  handleChange = (value) => {
-    console.log(value, "mycomp");
-    // this is going to call setFieldValue and manually update values.topcis
-    this.props.onChange("employee", value);
-  };
-
-  handleBlur = () => {
-    // this is going to call setFieldTouched and manually update touched.topcis
-    this.props.onBlur("employee", true);
-  };
-
-  render() {
-    return (
-      <div style={{ margin: "1rem 0" }}>
-        {/* <label htmlFor="color">Topics (select at least 3) </label> */}
-        <Select
-          options={this.props.option}
-          isMulti
-          onChange={this.handleChange}
-          onBlur={this.handleBlur}
-          value={this.props.value}
-        />
-        {!!this.props.error && this.props.touched && (
-          <div style={{ color: "red", marginTop: ".5rem" }}>
-            {this.props.error}
-          </div>
-        )}
-      </div>
-    );
-  }
-}
