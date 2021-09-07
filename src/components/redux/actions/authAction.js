@@ -1,15 +1,9 @@
 import axios from "../../config/axios";
 import * as types from "../store/constant";
 import Swal from "sweetalert2";
+import { useHistory } from "react-router";
 
-// const auth = (cust, data) => {
-//   return {
-//     type: cust,
-//     payload: data,
-//   };
-// };
-
-// Register User
+// Register a user
 
 export const registerUser = async (data, history) => {
   try {
@@ -21,17 +15,17 @@ export const registerUser = async (data, history) => {
       history.push("/login");
     }
   } catch (err) {
-    if (err.response) return alert(err.response.data);
+    if (err.response) return Swal.fire(err.response.data);
   }
 };
 
-// Login User
+// Login a User
 
 export const loginUser = (data, history) => async (dispatch) => {
   try {
     const res = await axios.post("/login", data);
     dispatch({ type: types.LOGIN_LOADER, payload: false });
-    if (res.data.hasOwnProperty("error")) return alert(res.data.error);
+    if (res.data.hasOwnProperty("error")) return Swal.fire(res.data.error);
     else {
       localStorage.setItem("token", res.data.token);
       Swal.fire("Good job!", 'login Successfully"', "success");
@@ -44,12 +38,14 @@ export const loginUser = (data, history) => async (dispatch) => {
 
 // Logout User
 
-export const logoutUser = () => (dispatch) => {
-  localStorage.removeItem("token");
-  alert("Logged out Successfully.");
-  // dispatch({ type: "RESET" });
-  window.location.href = "/";
-};
+// export const logoutUser = () => (dispatch) => {
+//   // const history = useHistory();
+//   localStorage.removeItem("token");
+
+//   Swal.fire("Are you sure?", "You want to Logout!", "warning");
+//   // dispatch(history.push("/home"));
+//   // dispatch({ type: "RESET" });
+// };
 
 // export const startLogoutUser = () => (dispatch) => {
 //   axios.delete("/users/logout").then((response) => {

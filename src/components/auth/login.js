@@ -8,13 +8,13 @@ import * as Yup from "yup";
 
 // Validations
 
+const validate = Yup.object().shape({
+  email: Yup.string().email("Email is invalid").required("*Email is required"),
+  password: Yup.string()
+    .min(6, "Password must be at least 6 charaters")
+    .required("*Password is required"),
+});
 const Login = () => {
-  const validate = Yup.object().shape({
-    email: Yup.string().email("Invalid email").required("Email is Required"),
-    password: Yup.string()
-      .min(6, "Too Short!")
-      .required("Password is Required"),
-  });
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -33,13 +33,22 @@ const Login = () => {
           dispatch(loginUser(values, history));
         }}
       >
-        {({ handleSubmit }) => (
+        {({ handleSubmit, errors, touched }) => (
           <div className="container">
             <h1> Login Here </h1>
 
             <Form onSubmit={handleSubmit}>
               <div className="tex_field">
                 <Field type="email" name="email" placeholder="Email" />
+                {errors.email && touched.email ? (
+                  <div
+                    style={{
+                      color: "red",
+                    }}
+                  >
+                    {errors.email}
+                  </div>
+                ) : null}
               </div>
               <div className="tex_field">
                 <Field
@@ -47,6 +56,15 @@ const Login = () => {
                   name="password"
                   placeholder="Enter password"
                 />
+                {errors.password && touched.password ? (
+                  <div
+                    style={{
+                      color: "red",
+                    }}
+                  >
+                    {errors.password}
+                  </div>
+                ) : null}
               </div>
               <button type="submit">Submit</button>
               <div className="sig_link">

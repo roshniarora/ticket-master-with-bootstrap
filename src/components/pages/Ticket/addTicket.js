@@ -50,22 +50,20 @@ const AddTicket = () => {
 
   return (
     <div>
-      <h1>TICKETS</h1>
       <Formik
         initialValues={{
-          code: "",
+          id: "",
           customer: "",
           department: "",
-          // employee: [],
           message: "",
           priority: "",
         }}
-        onSubmit={(values, { resetForm }) => {
-          const newData = { ...values, employee: employeeIds };
+        onSubmit={async (values, { resetForm }) => {
+          const newData = await { ...values, employees: employeeIds };
 
           console.log(newData, "newData");
-          resetForm({ newData: "" });
-          // setselectedValues("");
+          resetForm({ values: "" });
+          setselectedValues("");
 
           dispatch(postTicket(newData, history));
         }}
@@ -74,9 +72,9 @@ const AddTicket = () => {
           <div className="container text-right">
             <h1> Add Ticket </h1>
             <Form onSubmit={handleSubmit}>
-              <div className="tex_field">
+              {/* <div className="tex_field">
                 <Field type="text" name="code" placeholder="Code" /> <br />
-              </div>
+              </div> */}
 
               <div className="tex_field">
                 <Field
@@ -106,7 +104,6 @@ const AddTicket = () => {
                     select Department
                   </option>
                   {departments.map((ele) => {
-                    // console.log('dep', ele)
                     return <option value={ele._id}> {ele.department} </option>;
                   })}
                 </Field>
@@ -115,39 +112,44 @@ const AddTicket = () => {
               <div className="tex_field">
                 <Multiselect
                   placeholder="Select Employees"
-                  selectedValues={selectedValues || ""}
+                  selectedValues={selectedValues}
                   options={selectOtion}
                   displayValue="label"
                   onSelect={onSelect}
                   onRemove={onRemove}
-                  // defaultValue={selectedOptions}
-                  // closeMenuOnSelect={false}
                 />
               </div>
 
               <div className="tex_field">
                 <Field
+                  className="message-box"
                   as="textarea"
                   type="text"
                   name="message"
                   placeholder="Message"
                 />
               </div>
-
-              <label>
-                <Field type="radio" name="priority" value="low" />
-                low
-              </label>
-              <br />
-              <label>
-                <Field type="radio" name="priority" value="medim" />
-                medim
-              </label>
-              <br />
-              <label>
-                <Field type="radio" name="priority" value="high" />
-                high
-              </label>
+              <div id="my-radio-group">Priority</div>
+              <div role="group" aria-labelledby="my-radio-group">
+                <div>
+                  <label>
+                    <Field type="radio" name="priority" value="low" />
+                    low
+                  </label>
+                </div>
+                <div>
+                  <label>
+                    <Field type="radio" name="priority" value="medium" />
+                    medim
+                  </label>
+                </div>
+                <div>
+                  <label>
+                    <Field type="radio" name="priority" value="high" />
+                    high
+                  </label>
+                </div>
+              </div>
 
               <div>
                 <button type="submit">Submit</button>

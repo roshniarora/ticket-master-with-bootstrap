@@ -8,7 +8,7 @@ import {
 } from "../../redux/actions/departmentAction";
 import { useHistory } from "react-router-dom";
 import Button from "../../utility/button";
-
+import Swal from "sweetalert2";
 import PageHeader from "../../utility/pageHeader";
 
 const Department = () => {
@@ -21,19 +21,14 @@ const Department = () => {
     dispatch(getDepartment());
   }, [dispatch]);
 
-  console.log("depCompData", departments);
-
-  // const handleClick = () => {
-  //   history.push("/department");
-  //   console.log("clickDepartment");
-  // };
-
   const handleClickShow = (id) => {
     history.push(`/department/${id}`);
   };
 
   const handleClickDelete = (id) => {
-    if (window.confirm("Are you sure want to delete this item")) {
+    if (
+      Swal.fire("Are you sure?", "You won't be able to revert this!", "warning")
+    ) {
       return dispatch(deleteDepartmentById(id));
     } else {
       return "something went wrong";
@@ -92,10 +87,7 @@ const Department = () => {
       >
         {({ handleSubmit }) => (
           <Form onSubmit={handleSubmit}>
-            {/* <label> Add Department</label> */}
-
             <Field type="text" name="department" />
-
             <button type="submit">Add</button>
           </Form>
         )}

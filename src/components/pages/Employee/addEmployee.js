@@ -1,101 +1,70 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 import { Formik, Form, Field } from "formik";
-import { useDispatch , useSelector} from 'react-redux';
-import { postEmployee } from '../../redux/actions/employeeAction';
-import { useHistory } from 'react-router';
-import '../../auth/login.scss'
-import { getDepartment } from '../../redux/actions/departmentAction';
+import { useDispatch, useSelector } from "react-redux";
+import { postEmployee } from "../../redux/actions/employeeAction";
+import { useHistory } from "react-router";
+import "../../auth/login.scss";
+import { getDepartment } from "../../redux/actions/departmentAction";
 
-const AddEmployee = () =>{
+const AddEmployee = () => {
+  const departments = useSelector((state) => state.department.departments);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-const dispatch = useDispatch()
-const history = useHistory()
-const departments = useSelector(state =>state.department.departments)
+  useEffect(() => {
+    dispatch(getDepartment());
+  }, [dispatch]);
 
-useEffect(()=>{
-dispatch(getDepartment())
-},[dispatch])
-
-    return(
-       <div>
-         <h1>EMPLOYESS</h1>
-           <Formik
+  return (
+    <div>
+      <Formik
         initialValues={{
           name: "",
           email: "",
           mobile: "",
-          department:""
+          department: "",
         }}
         onSubmit={(values) => {
-          console.log(values);
-          dispatch(postEmployee( values, history ))
-          
+          dispatch(postEmployee(values, history));
         }}
       >
         {({ handleSubmit }) => (
-         <div className='container'>
-           <h1> Add Employee </h1>
-          <Form onSubmit={handleSubmit}>
-
-            {/* <label>Name</label>{" "} */}
-            <div className='tex_field'> 
-            <Field
-              type="text"
-              name="name"
-              placeholder='Name'
-              
-            /> <br />
-            </div>
-
-            <div className='tex_field'> 
-            {/* <label>email</label> */}
-            <Field
-              type="email"
-              name="email"
-              placeholder='Email'
-           /> <br />
-           </div>
-
-           <div className='tex_field'> 
-            {/* <label>mobile</label> */}
-            <Field
-              type="text"
-              name="mobile"
-              placeholder='mobile'
-              />
-              <br />
+          <div className="container">
+            <h1> Add Employee </h1>
+            <Form onSubmit={handleSubmit}>
+              <div className="tex_field">
+                <Field type="text" name="name" placeholder="Name" />
               </div>
 
-              <div className='tex_field'> 
-              <label>department</label>
+              <div className="tex_field">
+                <Field type="email" name="email" placeholder="Email" />
+              </div>
 
-          <Field name="department" component="select" defaultValue="select Department">
-              {
-                departments.map((ele)=>{
-                  console.log('dep', ele)
-                  return(
-                    <option value={ele._id}>  {ele.department} </option>
-                  )
-                })
-              }
+              <div className="tex_field">
+                <Field type="text" name="mobile" placeholder="mobile" />
+              </div>
 
-
-</Field>
-            <br />
-            </div>
-            <button type='submit'>Submit</button>
-       
-          </Form>
+              <div className="tex_field">
+                <Field
+                  name="department"
+                  component="select"
+                  class="form-select"
+                  aria-label="Default select example"
+                >
+                  <option value="" selected disabled>
+                    select Department
+                  </option>
+                  {departments.map((ele) => {
+                    return <option value={ele._id}> {ele.department} </option>;
+                  })}
+                </Field>
+              </div>
+              <button type="submit">Submit</button>
+            </Form>
           </div>
         )}
       </Formik>
-     
-        </div>
-    )
-        
-    
-}
-export default AddEmployee
-
-
-      
+    </div>
+  );
+};
+export default AddEmployee;

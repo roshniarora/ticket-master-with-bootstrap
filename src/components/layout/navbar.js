@@ -2,14 +2,47 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../redux/actions/authAction";
+import Swal from "sweetalert2";
 import "./navbar.scss";
+import { useHistory } from "react-router";
 
 const Navbar = () => {
   const token = localStorage.getItem("token");
-  const dispatch = useDispatch();
+
+  const history = useHistory();
 
   const handlelogout = () => {
-    dispatch(logoutUser());
+    Swal.fire({
+      title: "Are you sure? You want to Logout!",
+      // showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: `Yes`,
+      // denyButtonText: `Don't save`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        localStorage.removeItem("token");
+        history.push("/login");
+        Swal.fire("logout!", "", "success");
+      }
+      // } else if (result.isDenied) {
+      //   Swal.fire("Changes are not saved", "", "info");
+      // }
+    });
+    // console.log(
+    //   Swal.fire("Are you sure?", "You want to Logout!", "warning"),
+    //   "prompt"
+    // );
+    // if (Swal.fire("Are you sure?", "You want to Logout!", "warning") === true) {
+    //   console.log(
+    //     Swal.fire("Are you sure?", "You want to Logout!", "warning"),
+    //     "prompt2"
+    //   );
+    //   localStorage.removeItem("token");
+    //   return history.push("/login");
+    // } else {
+    //   return Swal.fire("something went wrong", "error");
+    // }
   };
 
   return (
@@ -79,7 +112,7 @@ const Navbar = () => {
               </li>
               <li className="nav-item">
                 {" "}
-                <Link to="/logout" onClick={handlelogout} className="nav-link">
+                <Link onClick={handlelogout} className="nav-link">
                   Logout
                 </Link>
               </li>

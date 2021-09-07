@@ -8,48 +8,44 @@ const Customerdispatch = (cust, data) => {
   };
 };
 
-// GET CUSTOMERs
+// Get all customers
 
 export const getCustomer = () => async (dispatch) => {
   try {
     const res = await axios.get("/customer");
-    console.log("custdata", res.data);
     dispatch(Customerdispatch(types.GET_CUSTOMER, res.data));
   } catch (err) {
     console.log(err);
   }
 };
 
-// POST CUSTOMERS
+// Post a customer
 
 export const postCustomer = (data, history) => async () => {
   try {
     const res = await axios.post("/customer", data);
-    console.log("postcust", res.data);
     if (res.data) return history.push("/customer");
   } catch (err) {
     console.log(err);
   }
 };
 
-// GET BY ID
+// Get a customer by id
 
 export const showCustomerBYID = (id) => async (dispatch) => {
   try {
     const res = await axios.get(`/customer/${id}`);
-    console.log("custdatabyid", res.data);
     dispatch(Customerdispatch(types.GET_CUSTOMER_BY_ID, res.data));
   } catch (err) {
     console.log(err);
   }
 };
 
-// Edit/ update by id
+// Update a customer
 
 export const updateCustomer = (id, data, history) => async (dispatch) => {
   try {
     const res = await axios.put(`/customer/${id}`, data);
-    console.log("custdupdate", res.data);
     if (res.data) return history.push("/customer");
     dispatch(getCustomer());
   } catch (err) {
@@ -57,7 +53,7 @@ export const updateCustomer = (id, data, history) => async (dispatch) => {
   }
 };
 
-// Delete by id
+// Delete a customer
 
 export const deleteCustomerById = (id) => async (dispatch) => {
   try {

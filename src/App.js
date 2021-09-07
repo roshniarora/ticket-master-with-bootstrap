@@ -2,7 +2,6 @@ import "./App.css";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Layout from "./components/layout/layout";
 import Navbar from "./components/layout/navbar";
-// import CustomerAdd from "./components/customer/addCustomer";
 import Customer from "./components/pages/customer/customers";
 import Employee from "./components/pages/Employee/employee";
 import Ticket from "./components/pages/Ticket/ticket";
@@ -20,6 +19,7 @@ import EmployeeShow from "./components/pages/Employee/showEmployee";
 import EmployeeEdit from "./components/pages/Employee/editEmployee";
 import Dashboard from "./components/auth/dashboard";
 import { PrivateRoute } from "./components/utility/privateRoute";
+import TicketShow from "./components/pages/Ticket/ticketShow";
 
 // const location = window.location.pathname;
 function App() {
@@ -90,6 +90,11 @@ function App() {
                 <PrivateRoute
                   path="/addticket"
                   component={AddTicket}
+                  exact={true}
+                />
+                <PrivateRoute
+                  path="/ticket/:id"
+                  component={TicketShow}
                   exact={true}
                 />
               </div>

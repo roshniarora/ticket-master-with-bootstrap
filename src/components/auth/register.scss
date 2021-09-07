@@ -1,7 +1,6 @@
 .card-register {
   font-weight: 500;
-  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%),
-    0 2px 10px 0 rgb(0 0 0 / 12%);
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
   width: 35%;
 
   position: relative;
@@ -22,59 +21,29 @@
 }
 .card-body {
   padding-top: 1.9rem;
-  
   padding-bottom: 4rem;
-  // border-radius: 0 !important;
-  
 }
-.input-user{
+.input-user {
   margin-bottom: 2rem;
   align-items: center;
   text-align: center;
   border: none;
   // margin-right: 2rem!important
-  
 }
-.input-email{
+.input-email {
   margin-bottom: 2rem;
   align-items: center;
   text-align: center;
   border: none;
 }
-.input-pass{
+.input-pass {
   margin-bottom: 2rem;
   align-items: center;
   text-align: center;
   border: none;
 }
-.font-regis{
+.font-regis {
   align-items: center;
   text-align: center;
   color: rgb(6, 31, 68);
-  
 }
-// }
-// .btn{
-//   display: flex;
-//   justify-content: left;
-//   align-items: center;
-//   text-align: center;
-//   margin-left: 7.5rem;
-//   background-color: rgb(11, 11, 102);
-  
-  
- 
-// }
-
-/* position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
-  width: 500px;
-  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%),
-    0 2px 10px 0 rgb(0 0 0 / 12%);
-  border-radius: 10px;
-  background-color: #fff;
-  padding: 30px 55px 15px;
-  overflow: hidden; */

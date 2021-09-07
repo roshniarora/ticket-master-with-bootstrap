@@ -8,37 +8,33 @@ import {
 import Button from "../../utility/button";
 import PageHeader from "../../utility/pageHeader";
 import "./employee.scss";
-
+import Swal from "sweetalert2";
 const Employee = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const employees = useSelector((state) => state.employee.employees);
-  // const departments = useSelector(state =>state.department.departments)
 
   useEffect(() => {
     dispatch(getEmployee());
   }, [dispatch]);
 
-  // console.log(Employee,'employecom data')
-
   const handleClick = () => {
     history.push("/addemployee");
-    console.log("employeeClick");
   };
 
   const handleClickShow = (id) => {
     history.push(`/employee/${id}`);
-    console.log("employeeShowClick");
   };
 
   const handleClickDelete = (id) => {
-    if (window.confirm("Are you sure to delte this record ?")) {
+    if (
+      Swal.fire("Are you sure?", "You won't be able to revert this!", "warning")
+    ) {
       return dispatch(deleteEmployeeById(id));
     } else {
       return "something went wrong";
     }
   };
-  console.log("employeeDeleteClick");
   return (
     <div className="emp-container">
       <div>
@@ -46,7 +42,7 @@ const Employee = () => {
           handleActionClick={handleClick}
           title="Employee -"
           count={employees.length}
-          btntitle="Add Employee"
+          btntitle="Add Emp.."
         />
       </div>
       <div className="emp-table-con">
@@ -70,23 +66,21 @@ const Employee = () => {
                   <td> {ele.name} </td>
                   <td> {ele.email} </td>
                   <td> {ele.mobile} </td>
-
                   <td value={ele._id}> {ele.department?.department} </td>
                   <td>
                     <Button
                       custStyle="show-btn"
                       handleAction={() => handleClickShow(ele._id)}
                       title="Show"
-                    />{" "}
+                    />
                   </td>
                   <td>
-                    {" "}
-                    {ele.remove}{" "}
+                    {ele.remove}
                     <Button
                       custStyle="delete-btn"
                       handleAction={() => handleClickDelete(ele._id)}
                       title="Remove"
-                    />{" "}
+                    />
                   </td>
                 </tr>
               );

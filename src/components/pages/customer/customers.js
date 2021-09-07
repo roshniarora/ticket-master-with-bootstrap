@@ -7,6 +7,7 @@ import {
 } from "../../redux/actions/customerAction";
 import Button from "../../utility/button";
 import PageHeader from "../../utility/pageHeader";
+import Swal from "sweetalert2";
 import "./customer.scss";
 
 const Customer = () => {
@@ -15,15 +16,11 @@ const Customer = () => {
   const customers = useSelector((state) => state.customer.customers);
 
   useEffect(() => {
-    // props.getCustomer()
     dispatch(getCustomer());
   }, [dispatch]);
 
-  console.log(customers, "prtopsdta");
-
   const handleClick = () => {
     history.push("/addcustomer");
-    console.log("click");
   };
 
   const handleClickShow = (id) => {
@@ -31,7 +28,9 @@ const Customer = () => {
   };
 
   const handleClickDelete = (id) => {
-    if (window.confirm("Are you sure to delete this record")) {
+    if (
+      Swal.fire("Are you sure?", "You won't be able to revert this!", "warning")
+    ) {
       return dispatch(deleteCustomerById(id));
     } else {
       return "something went wrong";
@@ -93,9 +92,4 @@ const Customer = () => {
     </div>
   );
 };
-
-// const mapStateToProps = (state )=>({
-// state : state.customer.customers
-// })
-
 export default Customer;
